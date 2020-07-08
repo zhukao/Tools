@@ -13,10 +13,11 @@ args = parser.parse_args()
 # pattern = re.compile('/home/hobot-dev/bin.fei/mask/(\S+)/(\S+)/(\S+).jpg')
 pattern = re.compile('/home/hobot-dev/bin.fei/mask/young/m/(\S+)/(\S+).jpg')
 
-
+frame_id = 1
 
 def padding_pic(pic_path, out_path):
-    out_pic_name = 'err.jpg'
+    #out_pic_name = 'err.jpg'
+    '''
     if re.match(pattern, pic_path):
         val_group = re.match(pattern, line).groups()
         path1 = val_group[0]
@@ -24,6 +25,11 @@ def padding_pic(pic_path, out_path):
         out_pic_name = path1 + '_' + path2
     else:
         print 'error ', pic_path
+    '''
+    
+    global frame_id
+    out_pic_name = str(frame_id)
+    frame_id += 1
 
     img = cv2.imread(pic_path, 1)
     # sp = img.shape
@@ -39,7 +45,7 @@ def padding_pic(pic_path, out_path):
     # cv2.imwrite(out_path + out_pic_name + '.jpg', pad_image)
 
     save_name = out_path + '/' + out_pic_name + '.jpg'
-    # print save_name
+    print save_name
     cv2.imwrite(save_name, padding(img, 1920, 1080))
 
 if __name__ == '__main__':
